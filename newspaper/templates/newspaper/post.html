@@ -1,0 +1,13 @@
+{% extends 'default.html' %}
+
+{% load custom_filters %}
+
+{% block title %}
+    {{ post.title_post }}
+{% endblock title %}
+
+{% block content %}
+    {{ post.title_post }}  -  {{ post.date }}
+    <hr>
+    {{ post.body_post|censor }}
+{% endblock content %}

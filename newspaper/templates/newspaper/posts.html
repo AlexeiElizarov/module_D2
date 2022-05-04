@@ -1,0 +1,37 @@
+{% extends 'default.html' %}
+{% load custom_filters %}
+
+{% block title %}
+    Posts
+{% endblock title %}
+
+{% block content %}
+    <h1>Все посты</h1>
+    <h3>Колличество всех новостей {{ posts|length }}</h3>
+    {% if posts %}
+        <table>
+            <tr>
+                <td>Название поста</td>
+                <td>Дата публикации</td>
+                <td>Новость/пост</td>
+                <td>Рэйтинг</td>
+                <td>Категория</td>
+            </tr>
+            {% for post in posts %}
+            <tr>
+                <td>{{ post.title_post|truncatechars:15 }}</td>
+                <td>{{ post.date }}</td>
+                <td>{{ post.body_post|truncatechars:50 }}</td>
+                <td>{{ post.rating_post }}</td>
+                <td>
+                    {% for category in post.post_category.get_queryset %}
+                        {{ category   }}
+                    {% endfor %}
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <h2>Постов нет</h2>
+    {% endif %}
+{% endblock content %}
