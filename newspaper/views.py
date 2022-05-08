@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from .models import Post, Category, Author
 from django.views import View
@@ -65,9 +66,12 @@ class PostCreateView(CreateView):
     form_class = PostForm
 
 
-class PostUpdateView(UpdateView):
+class PostUpdateView(LoginRequiredMixin, UpdateView):
+    # login_url = ''
+    # redirect_field_name = 'redirect_to'
     template_name = 'newspaper/post_edit.html'
     form_class = PostForm
+
 
     # метод get_object мы используем вместо queryset,
     # чтобы получить информацию об объекте который мы собираемся редактировать
