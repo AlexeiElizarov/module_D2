@@ -1,10 +1,10 @@
-{% extends "main.html" %}
+{% extends "default.html" %}
 
 {% block content %}
-<h2> Войти в систему </h2>
-<form method="post">
-{% csrf_token %}
-{{ form.as_p }}
-<input type="submit" value="Продолжить">
-</form>
+    <h2> Войти в систему </h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Продолжить">
+    </form>
 {% endblock %}

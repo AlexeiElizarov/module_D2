@@ -7,6 +7,9 @@ from allauth.account.forms import SignupForm
 from django.contrib.auth.models import Group
 
 # Форма для создания нового пользователя
+from django.urls import reverse
+
+
 class BaseRegisterForm(UserCreationForm):
     email = forms.EmailField(label = "Email")
     first_name = forms.CharField(label = "Имя")
@@ -28,3 +31,14 @@ class BasicSignupForm(SignupForm):
         basic_group = Group.objects.get(name='common')
         basic_group.user_set.add(user)
         return user
+
+
+class Profile(models.Model):
+    user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
+    about = models.CharField(max_length=250, blank=True)
+
+    def __str__(self):
+        return str(self.user)
+
+    def get_absolute_url(self):
+        return reverse('user_profile_page', kwargs={'pk': self.user.id})
