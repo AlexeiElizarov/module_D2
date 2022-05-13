@@ -3,29 +3,33 @@
 {% block title %} Post delete {% endblock title %}
 
 {% block content %}
-    <h2>Вы действительно хотите удалить данный товар?</h2>
-    <table>
-        <tr>
-            <td>Название поста</td>
-            <td>Дата публикации</td>
-            <td>Новость/пост</td>
-            <td>Рэйтинг</td>
-            <td>Категория</td>
-        </tr>
-        <tr>
-            <td>{{ post.title_post|truncatechars:15 }}</td>
-            <td>{{ post.date }}</td>
-            <td>{{ post.body_post|truncatechars:50 }}</td>
-            <td>{{ post.rating_post }}</td>
-            <td>
-                {% for category in post.post_category.get_queryset %}
-                {{ category   }}
-                {% endfor %}
-            </td>
-        </tr>
-    </table>
+    {% if is_authors %}
+        <h2>Вы действительно хотите удалить данный товар?</h2>
+        <table>
+            <tr>
+                <td>Название поста</td>
+                <td>Дата публикации</td>
+                <td>Новость/пост</td>
+                <td>Рэйтинг</td>
+                <td>Категория</td>
+            </tr>
+            <tr>
+                <td>{{ post.title_post|truncatechars:15 }}</td>
+                <td>{{ post.date }}</td>
+                <td>{{ post.body_post|truncatechars:50 }}</td>
+                <td>{{ post.rating_post }}</td>
+                <td>
+                    {% for category in post.post_category.get_queryset %}
+                    {{ category   }}
+                    {% endfor %}
+                </td>
+            </tr>
+        </table>
 
-    <form method="POST">
-    {% csrf_token %}
-    <input type="submit" value="подтвердить"></form>
+        <form method="POST">
+            {% csrf_token %}
+            <input type="submit" value="подтвердить"></form>
+    {% else %}
+            <h3>Вы должны быть автором чтобы редактировать пост</h3>
+    {% endif %}
 {% endblock content %}

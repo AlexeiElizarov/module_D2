@@ -18,4 +18,6 @@ urlpatterns = [
          name='user_profile_page'),
     path('create_profile_page/', CreateProfilePageView.as_view(),
          name='create_user_profile'),
+    path('edit_profile_page/', UpdateProfilePageView.as_view(),
+         name='edit_user_profile')
 ]

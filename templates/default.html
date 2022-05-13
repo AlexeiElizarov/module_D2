@@ -19,7 +19,7 @@
         <!-- Responsive navbar-->
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
             <div class="container-fluid">
-                <a class="navbar-brand" href="/">Navbar</a>
+                <a class="navbar-brand" href="/">Page user</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -36,22 +36,21 @@
                         </li>
 
                         {% if request.user.is_authenticated %}
-                            <li class="nav-item">
-                                <a class="nav-link" href="{% url 'user_profile_page' %}">Profile</a>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Profile
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    {% if not request.user.profile %}
+                                        <li><a class="dropdown-item" href="{% url 'create_user_profile' %}">Create profile</a></li>
+                                    {% elif  request.user.profile %}
+                                        <li><a class="dropdown-item" href="{% url 'user_profile_page' %}">Profile</a></li>
+                                        <li><a class="dropdown-item" href="{% url 'edit_user_profile' %}">Update profile</a></li>
+                                    {% endif %}
+                                </ul>
                             </li>
                         {% endif %}
 
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Dropdown
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="#">Action</a></li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
-                            </ul>
-                        </li>
                         <li class="nav-item">
                             <a class="nav-link disabled">Disabled</a>
                         </li>
@@ -59,7 +58,7 @@
                     {% if request.user.is_authenticated %}
                         <li class="navbar-user white_letter"> {{ user.username }} | <a class="white_letter" href="{% url 'logout' %}">Выйти</a></li>
                     {% else %}
-                        <li class="navbar-user white_letter"><a class="white_letter" href="">Регистрация</a> | <a class="white_letter" href="{% url 'login' %}">Войти</a></li>
+                        <li class="navbar-user white_letter"><a class="white_letter" href="{% url 'signup' %}">Регистрация</a> | <a class="white_letter" href="{% url 'login' %}">Войти</a></li>
                     {% endif %}
                     <form class="d-flex">
                         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">

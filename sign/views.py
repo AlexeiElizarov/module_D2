@@ -4,7 +4,9 @@ from django.shortcuts import redirect, get_object_or_404, render
 from django.contrib.auth.models import User
 from django.urls import reverse_lazy, reverse
 from django.views.generic import DetailView
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView
+
+from .forms import ProfileForm, BaseRegisterForm
 from .models import *
 from django.contrib.auth.models import Group
 from django.contrib.auth.decorators import login_required
@@ -29,13 +31,25 @@ def upgrade_me(request):
 class CreateProfilePageView(LoginRequiredMixin, CreateView):
     model = Profile
     template_name = 'sign/create_profile.html'
-    fields = ['about']
+    fields = ['about', 'age']
 
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super().form_valid(form)
 
-    # success_url = reverse_lazy('create_user_profile')   # FIXME
+    success_url = reverse_lazy('create_user_profile')   # FIXME
+
+
+class UpdateProfilePageView(LoginRequiredMixin, UpdateView):
+    form_class = ProfileForm
+    template_name = 'sign/edit_profile.html'
+    success_url = reverse_lazy('user_profile_page')
+
+    # метод get_object мы используем вместо queryset,
+    # чтобы получить информацию об объекте который мы собираемся редактировать
+    def get_object(self, **kwargs):
+        id = self.request.user.id
+        return Profile.objects.get(user_id=id)
 
 
 class GetProfileMixin(object):
@@ -52,6 +66,6 @@ class ShowProfilePageView(LoginRequiredMixin, GetProfileMixin, DetailView):
 
     def get_context_data(self, *args, **kwargs):
         context = super(ShowProfilePageView, self).get_context_data(*args, **kwargs)
-        page_user = get_object_or_404(Profile, id=self.request.user.id)
+        page_user = get_object_or_404(Profile, user_id=self.request.user.id)
         context['page_user'] = page_user
         return context
