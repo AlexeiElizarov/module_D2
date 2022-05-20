@@ -6,7 +6,7 @@
 {% endblock title %}
 
 {% block content %}
-
+        {{ request }}
         <h1>Все посты</h1>
         <h3>Колличество всех новостей {{ posts|length }}</h3>
 
@@ -36,7 +36,8 @@
                     <td>{{ post.rating_post }}</td>
                     <td>
                         {% for category in post.post_category.get_queryset %}
-                            {{ category   }}
+                        <a href="{% url 'test' category %}">{{ category }}</a>
+
                         {% endfor %}
                     </td>
                 </tr>

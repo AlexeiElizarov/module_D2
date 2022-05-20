@@ -42,7 +42,6 @@ INSTALLED_APPS = [
     'django.contrib.flatpages',
 
     'newspaper',
-    'django_filters',
 
     'sign',
     'protect',

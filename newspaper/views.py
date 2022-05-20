@@ -116,7 +116,15 @@ class PostSearchView(ListView):
             'form': PostForm(),
         }
 
+class PostListForCategriesView(ListView):
+    model = Post
+    template_name = 'newspaper/post_list.html'
+    context_object_name = 'posts'
 
 
+    def get_queryset(self):
+        print(self.request.readline())
+        # фильтрует Post по связанной таблице. Название поля таблицы берет в self.kwargs.get('category')
+        return Post.objects.filter(post_category__category=self.kwargs.get('category'))
 
 
