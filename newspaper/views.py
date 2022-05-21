@@ -1,5 +1,6 @@
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Post, Category, Author
 from django.views import View
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, FormView
@@ -130,6 +131,21 @@ class PostListForCategriesView(ListView):
         context = super().get_context_data(**kwargs)
         category = self.get_queryset()
         context['name_category'] = self.kwargs.get('category')
+        # user_category - все категории на которые подписан юзер
+        context['user_category'] = Category.objects.filter(subscribers=self.request.user)
+        context['is_not_category'] = \
+            not self.request.user.subscribe.filter(category=self.kwargs.get('category')).exists()
         return context
+
+@login_required
+def subscribe_user(request, **kwargs):
+    """Получает юзера, получаем категорию на странице которой находимся, и добавляем отношение"""
+    user = request.user
+    category = Category.objects.get(category=kwargs['category'])
+    request.user.subscribe.add(category.id)
+    if not request.user.groups.filter(name='authors').exists():
+        # premium_group.user_set.add(user)
+        print('1')
+    return redirect('/')
 
 

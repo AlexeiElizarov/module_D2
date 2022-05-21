@@ -12,4 +12,19 @@
 <h3>Колличество всех новостей {{ posts|length }}</h3>
 {% endblock quantity_news %}
 
+{% block button %}
+    <hr>
+    {% if is_not_category %}
+        <button><a href="{% url 'subscribe' name_category %}">Подписаться на категорию <i>{{ name_category }}</i></a></button>
+
+    {% endif %}
+    <h4>
+        Вы подписаны на категории
+        {% for category in user_category %}
+            <i>{{ category }}</i>
+        {% endfor %}
+
+    </h4>
+{% endblock button %}
+
 

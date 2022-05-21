@@ -10,6 +10,7 @@ urlpatterns = [
     path('search/', PostSearchView.as_view(), name='post_search'),
     path('add/', PostCreateView.as_view(), name='post_create'),
     path('<str:category>/', PostListForCategriesView.as_view(), name='category_list'),
+    path('<str:category>/subscribe/', subscribe_user, name='subscribe'),
 
 ]
 
