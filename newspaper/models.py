@@ -22,18 +22,18 @@ class Author(models.Model):
             count += comment.rating_comment
         self.rating_author = count
 
-
     @staticmethod
     def get_best_author():
         best = Author.objects.all().order_by('-rating_author')[0]
         return best.user.username, best.rating_author
 
-
     def get_rating(self):
         return self.rating_author
 
+
 class Category(models.Model):
     category = models.CharField(max_length=255, unique=True)
+    subscribers = models.ManyToManyField(User)
 
     def __str__(self):
         return self.category

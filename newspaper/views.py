@@ -11,7 +11,7 @@ from .forms import *
 
 class PostsList(ListView):
     model = Post
-    template_name = 'newspaper\post_list.html'
+    template_name = 'newspaper\post_list_all.html'
     context_object_name = 'posts'
     paginate_by = 10
     # добавляем форм класс, чтобы получать доступ к форме через метод POST
@@ -117,14 +117,19 @@ class PostSearchView(ListView):
         }
 
 class PostListForCategriesView(ListView):
+    """Вьюха вывовдит все посты с выбранной категорией"""
     model = Post
-    template_name = 'newspaper/post_list.html'
+    template_name = 'newspaper/post_list_category.html'
     context_object_name = 'posts'
 
-
+    # фильтрует Post по связанной таблице. Название поля таблицы берет в self.kwargs.get('category')
     def get_queryset(self):
-        print(self.request.readline())
-        # фильтрует Post по связанной таблице. Название поля таблицы берет в self.kwargs.get('category')
         return Post.objects.filter(post_category__category=self.kwargs.get('category'))
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        category = self.get_queryset()
+        context['name_category'] = self.kwargs.get('category')
+        return context
 
 

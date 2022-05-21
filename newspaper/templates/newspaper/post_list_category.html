@@ -1,0 +1,15 @@
+{% extends 'newspaper/post_list.html' %}
+
+{% block title %}
+    {{ name_category }}
+{% endblock title %}
+
+
+{% block h1 %}
+<h1>Все посты категории <i>{{ name_category }}</i></h1>
+{% endblock h1 %}
+{% block quantity_news %}
+<h3>Колличество всех новостей {{ posts|length }}</h3>
+{% endblock quantity_news %}
+
+

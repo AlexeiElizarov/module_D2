@@ -1,19 +1,11 @@
 {% extends 'default.html' %}
 {% load custom_filters %}
 
-{% block title %}
-    Posts list
-{% endblock title %}
+
 
 {% block content %}
-        {{ request }}
-        <h1>Все посты</h1>
-        <h3>Колличество всех новостей {{ posts|length }}</h3>
-
-        {% block search %}
-
-        {% endblock search %}
-
+{% block h1 %}{% endblock h1 %}
+{% block quantity_news %}{% endblock quantity_news %}
         {% if posts %}
             <table>
                 <tr>
@@ -36,7 +28,7 @@
                     <td>{{ post.rating_post }}</td>
                     <td>
                         {% for category in post.post_category.get_queryset %}
-                        <a href="{% url 'test' category %}">{{ category }}</a>
+                        <a href="{% url 'category_list' category %}">{{ category }}</a>
 
                         {% endfor %}
                     </td>
@@ -71,10 +63,7 @@
                 {% endif %}
                 <a href="?{% param_replace page=paginator.num_pages %}">Last</a>
             {% endif %}
-    <!--        {% if page_obj.has_next %}-->
-    <!--            <a href="?page={{ page_obj.next_page_number }}">>></a>-->
-    <!--            <a href="?page={{ page_obj.paginator.num_pages }}">Last</a>-->
-    <!--        {% endif %}-->
         {% endif %}
+
 
 {% endblock content %}

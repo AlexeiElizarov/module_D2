@@ -1,0 +1,19 @@
+{% extends 'newspaper/post_list.html' %}
+{% load custom_filters %}
+
+{% block title %}
+    Все посты
+{% endblock title %}
+
+        {% block h1 %}
+            <h1>Все посты</h1>
+        {% endblock h1 %}
+        {% block quantity_news %}
+            <h3>Колличество всех новостей {{ posts|length }}</h3>
+        {% endblock quantity_news %}
+
+
+
+
+
+
