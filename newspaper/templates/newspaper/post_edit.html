@@ -12,5 +12,7 @@
         </form>
     {% else %}
         <h3>Вы должны быть автором чтобы редактировать пост</h3>
+        <hr>
+        <button><a href="{% url 'upgrade' %}">Стать автором</a></button>
     {% endif %}
 {% endblock content %}

@@ -45,6 +45,7 @@ INSTALLED_APPS = [
 
     'sign',
     'protect',
+    'appointment',
 
     'allauth',
     'allauth.account',
@@ -53,7 +54,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',
 
 ]
-
+DEFAULT_FROM_EMAIL = 'Lafen55@yandex.ru'
 SITE_ID = 1
 
 MIDDLEWARE = [
@@ -168,3 +169,9 @@ ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_EMAIL_VERIFICATION = 'none'
 
 ACCOUNT_FORMS = {'signup': 'sign.models.BasicSignupForm'}
+
+EMAIL_HOST = 'smtp.yandex.ru'
+EMAIL_PORT = 465
+EMAIL_HOST_USER = 'Lafen55'
+EMAIL_HOST_PASSWORD = ''
+EMAIL_USE_SSL = True

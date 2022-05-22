@@ -1,13 +1,18 @@
+from time import strptime
+
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
+from django.template.loader import render_to_string
+
 from .models import Post, Category, Author
 from django.views import View
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, FormView
 from django.core.paginator import Paginator
 from .filters import PostFilter
 from .forms import *
-
+from django.core.mail import send_mail
+from django.core.mail import EmailMultiAlternatives
 
 
 class PostsList(ListView):
@@ -61,13 +66,50 @@ class PostDetailView(DetailView):
 # Надо указать только имя шаблона и класс формы который мы написали в прошлом юните.
 # Остальное он сделает за вас
 class PostCreateView(LoginRequiredMixin, CreateView):
-    template_name = 'newspaper/post_create.html'
+    model = Post
     form_class = PostForm
+    template_name = 'newspaper/post_create.html'
+    success_url = '/news/'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['is_authors'] = self.request.user.groups.filter(name='authors').exists()
         return context
+
+    def post(self, request, *args, **kwargs):
+        user = request.user.username
+        user_email = request.user.email
+        post = Post(
+            author=Author.objects.get(pk=request.POST['author']),
+            title_post=request.POST['title_post'],
+            body_post=request.POST['body_post'],
+        )
+        post.save()
+        post.post_category.add(request.POST['post_category'])
+
+        name_category = Category.objects.get(pk=request.POST['post_category'])
+        html_content = render_to_string(
+            'newspaper/email_template.html',
+            {'post': post, 'user': user, 'name_category': name_category})
+        msg = EmailMultiAlternatives(
+            subject=f'{post.title_post}',
+            body=f"Новый пост",
+            from_email='Lafen55@yandex.ru',
+            to=[f'{user_email}',],
+        )
+
+        # другой вариант
+        # send_mail(
+        #     subject=f'{post.title_post}',
+        #     message="Новый пост",
+        #     from_email='Lafen55@yandex.ru',
+        #     recipient_list=['alexeiasd2@gmail.com']
+        # )
+
+        msg.attach_alternative(html_content, "text/html")
+        msg.send()
+        return redirect('/news')
+
 
 
 class PostUpdateView(LoginRequiredMixin, UpdateView):
@@ -145,7 +187,7 @@ def subscribe_user(request, **kwargs):
     request.user.subscribe.add(category.id)
     if not request.user.groups.filter(name='authors').exists():
         # premium_group.user_set.add(user)
-        print('1')
+        print('111')
     return redirect('/')
 
 
