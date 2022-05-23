@@ -45,16 +45,15 @@ INSTALLED_APPS = [
 
     'sign',
     'protect',
-    'appointment',
 
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
     # ... include the providers you want to enable:
-    'allauth.socialaccount.providers.google',
+    # 'allauth.socialaccount.providers.google',
 
 ]
-DEFAULT_FROM_EMAIL = 'Lafen55@yandex.ru'
+
 SITE_ID = 1
 
 MIDDLEWARE = [
@@ -168,10 +167,12 @@ ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_EMAIL_VERIFICATION = 'none'
 
-ACCOUNT_FORMS = {'signup': 'sign.models.BasicSignupForm'}
+# ACCOUNT_FORMS = {'signup': 'sign.models.BasicSignupForm'}
 
 EMAIL_HOST = 'smtp.yandex.ru'
 EMAIL_PORT = 465
 EMAIL_HOST_USER = 'Lafen55'
 EMAIL_HOST_PASSWORD = ''
 EMAIL_USE_SSL = True
+
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER + '@yandex.ru'

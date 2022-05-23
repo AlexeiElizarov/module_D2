@@ -1,9 +1,19 @@
 from django.db import models
+from allauth.account.forms import SignupForm
+from django.contrib.auth.models import Group
 
 from django.contrib.auth.models import User
 from django.urls import reverse
 
 # Форма для создания нового пользователя
+
+class BasicSignupForm(SignupForm):
+    def save(self, request):
+        user = super(BasicSignupForm, self).save(request)
+        basic_group = Group.objects.get(name='common')
+        basic_group.user_set.add(user)
+        return user
+
 
 class Profile(models.Model):
     user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)

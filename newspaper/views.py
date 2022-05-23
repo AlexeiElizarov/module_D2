@@ -78,7 +78,7 @@ class PostCreateView(LoginRequiredMixin, CreateView):
 
     def post(self, request, *args, **kwargs):
         user = request.user.username
-        user_email = request.user.email
+        # user_email = request.user.email
         post = Post(
             author=Author.objects.get(pk=request.POST['author']),
             title_post=request.POST['title_post'],
@@ -88,6 +88,8 @@ class PostCreateView(LoginRequiredMixin, CreateView):
         post.post_category.add(request.POST['post_category'])
 
         name_category = Category.objects.get(pk=request.POST['post_category'])
+        users_subscribers = User.objects.filter(subscribe=request.POST['post_category']) # users подписанные на категорию
+        email_users_subscribers = [u.email for u in users_subscribers] # почта этих users
         html_content = render_to_string(
             'newspaper/email_template.html',
             {'post': post, 'user': user, 'name_category': name_category})
@@ -95,7 +97,7 @@ class PostCreateView(LoginRequiredMixin, CreateView):
             subject=f'{post.title_post}',
             body=f"Новый пост",
             from_email='Lafen55@yandex.ru',
-            to=[f'{user_email}',],
+            to=email_users_subscribers,
         )
 
         # другой вариант
