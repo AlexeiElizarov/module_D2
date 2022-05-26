@@ -8,7 +8,7 @@ class Author(models.Model):
     rating_author = models.IntegerField(default=1)
 
     def __str__(self):
-        return self.full_name
+        return f'{self.full_name}'
 
     def update_rating(self):
         count = 0
@@ -28,7 +28,7 @@ class Author(models.Model):
         return best.user.username, best.rating_author
 
     def get_rating(self):
-        return self.rating_author
+        return f'{self.rating_author}'
 
 
 class Category(models.Model):
@@ -36,7 +36,7 @@ class Category(models.Model):
     subscribers = models.ManyToManyField(User, related_name='subscribe')
 
     def __str__(self):
-        return self.category
+        return f'{self.category}'
 
 
 class Post(models.Model):
@@ -57,7 +57,7 @@ class Post(models.Model):
     post_category = models.ManyToManyField(Category, through='PostCategory')
 
     def __str__(self):
-        return self.title_post
+        return f'{self.title_post}'
 
     def get_absolute_url(self):
         return f'/news/{self.id}'
@@ -97,7 +97,7 @@ class Comment(models.Model):
     rating_comment = models.IntegerField(default=1)
 
     def __str__(self):
-        return self.body_comment[:50]
+        return f'{self.body_comment[:50]}'
 
     def like(self):
         self.rating_comment += 1

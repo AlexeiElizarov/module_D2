@@ -13,6 +13,9 @@ from django.contrib.auth.decorators import login_required
 
 
 # Create-дженерик для формы создания нового пользователя
+from newspaper.models import Author
+
+
 class BaseRegisterView(CreateView):
     model = User
     form_class = BaseRegisterForm
@@ -22,9 +25,11 @@ class BaseRegisterView(CreateView):
 @login_required
 def upgrade_me(request):
     user = request.user
-    premium_group = Group.objects.get(name='authors')
+    authors_group = Group.objects.get(name='authors')
     if not request.user.groups.filter(name='authors').exists():
-        premium_group.user_set.add(user)
+        authors_group.user_set.add(user)
+    Author.objects.create(full_name=user.username,
+                          user=user,)
     return redirect('/')
 
 
