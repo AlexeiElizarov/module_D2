@@ -31,7 +31,7 @@ def my_job():
         print('start')
         users_subscribers = User.objects.filter(subscribe=name_category)
         today = date.today()
-        seven_day_before = today - timedelta(days=2)
+        seven_day_before = today - timedelta(days=7)
         posts = Post.objects.filter(date__gte=seven_day_before,
                                      post_category__category=name_category)
         print(posts)
@@ -73,7 +73,7 @@ class Command(BaseCommand):
         # добавляем работу нашему задачнику
         scheduler.add_job(
             my_job,
-            trigger=CronTrigger(second="*/10"),#second="*/10"
+            trigger=CronTrigger(day_of_week="mon", hour="00", minute="00"),#second="*/10"
             # Тоже самое что и интервал, но задача тригера таким образом более понятна django
             id="my_job",  # уникальный айди
             max_instances=1,
