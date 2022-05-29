@@ -3,12 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>{% block title %}{% endblock title %}</title>
 </head>
 <body>
-    <p>Здравствуй. Новая статья в твоём любимом разделе {{ name_category }}!</p>
-    <hr>
-    <h3>{{ post.title_post }}</h3>
-    {{ post.body_post|truncatechars:50 }}
+    {% block content %}
+
+    {% endblock content %}
 </body>
 </html>

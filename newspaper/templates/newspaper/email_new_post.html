@@ -1,0 +1,13 @@
+{% extends 'newspaper/email_template.html' %}
+
+{% block title %}
+    New post
+{% endblock title %}
+
+{% block content %}
+    <p>Здравствуй. Новая статья в твоём любимом разделе {{ name_category }}!</p>
+    <hr>
+    <h3>{{ post.title_post }}</h3>
+    {{ post.body_post|truncatechars:50 }}
+    <a href="http://127.0.0.1:8000{% url 'post_detail' post.id %}">Просмотр</a>
+{% endblock content %}

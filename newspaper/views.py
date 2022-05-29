@@ -12,11 +12,7 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from django.core.paginator import Paginator
 from .filters import PostFilter
 from .forms import *
-from django.core.mail import send_mail
-from django.core.mail import EmailMultiAlternatives
 
-from django.db.models.signals import post_save, m2m_changed
-from django.dispatch import receiver
 
 
 class PostsList(ListView):
@@ -66,26 +62,6 @@ class PostDetailView(DetailView):
     queryset = Post.objects.all()
 
 
-@ receiver (m2m_changed, sender=Post.post_category.through)
-def m2m_changed_dispatcher(sender, instance, action, **kwargs):
-    if action == 'post_add':
-        pk_set = kwargs['pk_set'].pop()
-        name_category = Category.objects.get(pk=pk_set)
-        users_subscribers = User.objects.filter(subscribe=pk_set)  # users подписанные на категорию
-        email_users_subscribers = [u.email for u in users_subscribers]  # почта этих users
-        html_content = render_to_string(
-            'newspaper/email_template.html',
-            {'post': instance, 'name_category': name_category})
-        msg = EmailMultiAlternatives(
-            subject=f'{instance.title_post}',
-            body=f"Новый пост",
-            from_email='Lafen55@yandex.ru',
-            to=email_users_subscribers,
-        )
-        msg.attach_alternative(html_content, "text/html")
-        msg.send()
-
-
 # дженерик для создания объекта.
 # Надо указать только имя шаблона и класс формы который мы написали в прошлом юните.
 # Остальное он сделает за вас
@@ -95,7 +71,7 @@ class PostCreateView(LoginRequiredMixin, CreateView):
     template_name = 'newspaper/post_create.html'
     success_url = '/news/'
 
-    def get_number_of_post(self):
+    def get_number_of_post(self) -> int:
         '''возвращает колличество постов сохраненных user за текущую дату'''
         user = self.request.user
         date_now = datetime.date.today()
@@ -113,7 +89,7 @@ class PostCreateView(LoginRequiredMixin, CreateView):
 
     def post(self, request, *args, **kwargs):
         post = Post(
-            author=Author.objects.get(pk=request.POST['author']),
+            author=Author.objects.get(user=request.user),
             title_post=request.POST['title_post'],
             body_post=request.POST['body_post'],
         )

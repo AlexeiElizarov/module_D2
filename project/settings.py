@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     # ... include the providers you want to enable:
     # 'allauth.socialaccount.providers.google',
+    "django_apscheduler",
 
 ]
 
@@ -172,7 +173,10 @@ ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 EMAIL_HOST = 'smtp.yandex.ru'
 EMAIL_PORT = 465
 EMAIL_HOST_USER = 'Lafen55'
-EMAIL_HOST_PASSWORD = 'fszqhvnwngijcgsa'
+EMAIL_HOST_PASSWORD = ''
 EMAIL_USE_SSL = True
 
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER + '@yandex.ru'
+
+APSCHEDULER_DATETIME_FORMAT = "N j, Y, f:s a"
+APSCHEDULER_RUN_NOW_TIMEOUT = 25

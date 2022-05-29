@@ -14,7 +14,7 @@ class PostForm(ModelForm):
 
     class Meta:
         model = Post
-        fields = ['author', 'title_post', 'body_post', 'post_category']
+        fields = ['title_post', 'body_post', 'post_category']
 
 
 class SignUpForm(UserCreationForm):

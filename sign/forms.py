@@ -1,3 +1,4 @@
+from django.core.mail import send_mail
 from django.forms import ModelForm
 from .models import Profile
 from django.contrib.auth.forms import UserCreationForm
@@ -32,4 +33,11 @@ class BaseRegisterForm(UserCreationForm):
         basic_group.user_set.add(user)
         if commit:
             user.save()
+        print(user.email)
+        send_mail(
+            subject='Hello',
+            message=f'Hello, {user.username}. Вы зарегистрированны.',
+            from_email='Lafen55@yandex.ru',
+            recipient_list=[user.email]
+        )
         return user
