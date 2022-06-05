@@ -47,6 +47,24 @@ def param_replace(context, **kwargs):
         d[k] = v
     for k in [k for k, v in d.items() if not v]:
         del d[k]
-    print('1', d.urlencode())
-    print('2', d)
     return d.urlencode()
+
+
+FORBIDDIEN_WORDS = [
+    'редиска'
+]
+
+@register.filter
+def unwanted_words_filter(value):
+    lst = []
+    for word in value.split():
+        result = ''
+        if word in FORBIDDIEN_WORDS:
+            result += word[0]
+            for _ in word[1:-1]:
+                result += '*'
+            result += word[-1]
+        else:
+            result += word
+        lst.append(result)
+    return ' '.join(lst)

@@ -1,6 +1,8 @@
 {% extends 'default.html' %}
 {% load custom_filters %}
 
+{% load unwanted_words_filter %}
+
 {% block title %}
     Posts
 {% endblock title %}
@@ -21,7 +23,7 @@
             <tr>
                 <td>{{ post.title_post|truncatechars:15 }}</td>
                 <td>{{ post.date }}</td>
-                <td>{{ post.body_post|truncatechars:50 }}</td>
+                <td>{{ post.body_post|unwanted_words_filter }}</td>
                 <td>{{ post.rating_post }}</td>
                 <td>
                     {% for category in post.post_category.get_queryset %}

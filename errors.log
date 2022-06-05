@@ -1,0 +1,4 @@
+2022-06-05 11:00:54,712 ERROR "GET /news/%E2%96%8C%D1%8A%D1%8E%D1%8D%D1%8E%D1%8C%D1%88%D1%8A%D1%80/ HTTP/1.1" 500 145 D:\Alexei\SkillFactory\projectManufacture\venv\lib\site-packages\django\core\servers\basehttp.py None
+2022-06-05 11:01:10,191 ERROR "GET /news/%E2%95%9F%D1%84%D1%8E%D0%81%D1%8E%D1%82%E2%84%96%D1%85/ HTTP/1.1" 500 145 D:\Alexei\SkillFactory\projectManufacture\venv\lib\site-packages\django\core\servers\basehttp.py None
+2022-06-05 11:01:57,763 ERROR "GET /news/%E2%94%AC%D1%8E%D1%8E%D0%81%D1%94%D1%86%D1%85%D1%8D%D1%88%C2%A0/ HTTP/1.1" 500 145 D:\Alexei\SkillFactory\projectManufacture\venv\lib\site-packages\django\core\servers\basehttp.py None
+2022-06-05 11:04:48,799 ERROR "GET /news/%E2%94%AC%D1%8E%D1%8E%D0%81%D1%94%D1%86%D1%85%D1%8D%D1%88%C2%A0/ HTTP/1.1" 500 145 D:\Alexei\SkillFactory\projectManufacture\venv\lib\site-packages\django\core\servers\basehttp.py None

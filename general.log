@@ -1,0 +1,29 @@
+INFO autoreload 2022-06-05 09:39:44,835 Watching for file changes with StatReloader
+INFO autoreload 2022-06-05 09:40:03,968 D:\Alexei\SkillFactory\SF_D2\project\newspaper\views.py changed, reloading.
+INFO autoreload 2022-06-05 09:40:04,644 Watching for file changes with StatReloader
+INFO autoreload 2022-06-05 09:40:24,370 D:\Alexei\SkillFactory\SF_D2\project\newspaper\views.py changed, reloading.
+INFO autoreload 2022-06-05 09:40:25,050 Watching for file changes with StatReloader
+INFO autoreload 2022-06-05 09:40:58,673 D:\Alexei\SkillFactory\SF_D2\project\newspaper\views.py changed, reloading.
+INFO autoreload 2022-06-05 09:40:59,426 Watching for file changes with StatReloader
+INFO autoreload 2022-06-05 09:42:30,326 D:\Alexei\SkillFactory\SF_D2\project\newspaper\views.py changed, reloading.
+INFO autoreload 2022-06-05 09:42:30,996 Watching for file changes with StatReloader
+INFO autoreload 2022-06-05 09:42:48,791 D:\Alexei\SkillFactory\SF_D2\project\newspaper\urls.py changed, reloading.
+INFO autoreload 2022-06-05 09:42:49,449 Watching for file changes with StatReloader
+INFO autoreload 2022-06-05 09:43:11,399 D:\Alexei\SkillFactory\SF_D2\project\newspaper\urls.py changed, reloading.
+INFO autoreload 2022-06-05 09:43:12,086 Watching for file changes with StatReloader
+INFO autoreload 2022-06-05 09:44:42,789 D:\Alexei\SkillFactory\SF_D2\project\project\settings.py changed, reloading.
+INFO autoreload 2022-06-05 10:58:02,283 Watching for file changes with StatReloader
+INFO autoreload 2022-06-05 10:59:41,836 D:\Alexei\SkillFactory\SF_D2\project\project\settings.py changed, reloading.
+INFO autoreload 2022-06-05 10:59:42,626 Watching for file changes with StatReloader
+INFO autoreload 2022-06-05 11:00:02,459 D:\Alexei\SkillFactory\SF_D2\project\newspaper\views.py changed, reloading.
+INFO autoreload 2022-06-05 11:00:03,100 Watching for file changes with StatReloader
+INFO autoreload 2022-06-05 11:00:51,774 D:\Alexei\SkillFactory\SF_D2\project\project\settings.py changed, reloading.
+INFO autoreload 2022-06-05 11:00:52,446 Watching for file changes with StatReloader
+ERROR basehttp 2022-06-05 11:00:54,712 "GET /news/%E2%96%8C%D1%8A%D1%8E%D1%8D%D1%8E%D1%8C%D1%88%D1%8A%D1%80/ HTTP/1.1" 500 145
+ERROR basehttp 2022-06-05 11:01:10,191 "GET /news/%E2%95%9F%D1%84%D1%8E%D0%81%D1%8E%D1%82%E2%84%96%D1%85/ HTTP/1.1" 500 145
+ERROR basehttp 2022-06-05 11:01:57,763 "GET /news/%E2%94%AC%D1%8E%D1%8E%D0%81%D1%94%D1%86%D1%85%D1%8D%D1%88%C2%A0/ HTTP/1.1" 500 145
+INFO autoreload 2022-06-05 11:04:44,399 Watching for file changes with StatReloader
+ERROR basehttp 2022-06-05 11:04:48,799 "GET /news/%E2%94%AC%D1%8E%D1%8E%D0%81%D1%94%D1%86%D1%85%D1%8D%D1%88%C2%A0/ HTTP/1.1" 500 145
+INFO autoreload 2022-06-05 11:05:12,805 D:\Alexei\SkillFactory\SF_D2\project\newspaper\urls.py changed, reloading.
+INFO autoreload 2022-06-05 11:05:13,461 Watching for file changes with StatReloader
+INFO autoreload 2022-06-05 11:06:28,249 D:\Alexei\SkillFactory\SF_D2\project\project\settings.py changed, reloading.

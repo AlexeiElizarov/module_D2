@@ -1,3 +1,4 @@
+from django.core.cache import cache
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -62,6 +63,10 @@ class Post(models.Model):
     def get_absolute_url(self):
         return f'/news/{self.id}'
 
+    @property
+    def on_stock(self):
+        return self.rating_post > 1
+
     def like(self):
         self.rating_post += 1
 
@@ -80,6 +85,10 @@ class Post(models.Model):
     def get_all_comment_for_best_post():
         best_post = Post.objects.all().order_by('-rating_post')[0]
         return Comment.objects.filter(post=best_post)
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        cache.delete(f'post-{self.pk}')
 
 
 
